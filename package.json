@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
+    "seed": "tsx ./seeds/seed.ts",
     "prepare": "husky install"
   },
   "keywords": [],
