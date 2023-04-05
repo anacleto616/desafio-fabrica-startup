@@ -1,9 +1,20 @@
 import express from 'express';
+import { router } from './app/routes/routes';
+import mongoose from 'mongoose';
 
-const app = express();
+mongoose
+  .connect('mongodb://localhost:27017')
+  .then( async () => {
+    const app = express();
 
-app.use(express.json());
+    app.use(express.json());
+    app.use(router);
 
-app.listen(3333, () => {
-	console.log('🚀️ Server is running on http://localhost:3333');
-});
+    app.listen(3333, () => {
+      console.log('🚀️ Server is running on http://localhost:3333');
+    });
+
+  })
+  .catch(() => console.log('Error connecting to database!'));
+
+
