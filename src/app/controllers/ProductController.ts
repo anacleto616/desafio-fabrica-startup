@@ -22,6 +22,13 @@ class ProductController {
 
     response.status(200).json(product);
   }
+
+  async delete(request: Request, response: Response) {
+    const { id } = request.params;
+    await ProductsRepository.delete(id);
+
+    response.sendStatus(204);
+  }
 }
 
 export default new ProductController();

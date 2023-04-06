@@ -21,6 +21,12 @@ class ProductsRepository {
 
     return row;
   }
+
+  async delete(id: string) {
+    const deleteOp = await Product.findByIdAndDelete(id);
+
+    return deleteOp;
+  }
 }
 
 export default new ProductsRepository();
