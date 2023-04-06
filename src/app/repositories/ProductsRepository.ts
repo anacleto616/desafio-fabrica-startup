@@ -22,6 +22,12 @@ class ProductsRepository {
     return row;
   }
 
+  async update(id: string, { categories, name, quantity, price }: ProductType) {
+    const row = await Product.findByIdAndUpdate(id, { categories, name, quantity, price });
+
+    return row;
+  }
+
   async delete(id: string) {
     const deleteOp = await Product.findByIdAndDelete(id);
 

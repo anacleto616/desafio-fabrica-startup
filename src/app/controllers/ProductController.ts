@@ -23,6 +23,22 @@ class ProductController {
     response.status(200).json(product);
   }
 
+  async update(request: Request, response: Response) {
+    const { id } = request.params;
+    const { categories, name, quantity, price } = request.body;
+
+    await ProductsRepository.update(id,
+      {
+        categories,
+        name,
+        quantity,
+        price
+      }
+    );
+
+    response.status(200).json({ message: 'Successfully updated product.' });
+  }
+
   async delete(request: Request, response: Response) {
     const { id } = request.params;
     await ProductsRepository.delete(id);
