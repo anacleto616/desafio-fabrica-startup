@@ -15,6 +15,13 @@ class ProductController {
 
     response.status(200).json(products);
   }
+
+  async show(request: Request, response: Response) {
+    const { id } = request.params;
+    const product = await ProductsRepository.findById(id);
+
+    response.status(200).json(product);
+  }
 }
 
 export default new ProductController();

@@ -15,6 +15,12 @@ class ProductsRepository {
 
     return row;
   }
+
+  async findById(id: string) {
+    const row = await Product.findById(id);
+
+    return row;
+  }
 }
 
 export default new ProductsRepository();

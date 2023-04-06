@@ -10,4 +10,5 @@ router.get('/categories', CategoryController.index);
 // Product
 router.post('/products', ProductController.store);
 router.get('/products', ProductController.index);
+router.get('/products/:id', ProductController.show);
 
