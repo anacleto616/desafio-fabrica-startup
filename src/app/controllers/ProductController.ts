@@ -9,6 +9,12 @@ class ProductController {
 
     response.status(201).json({message: 'Product created successfully.'});
   }
+
+  async index(request: Request, response: Response) {
+    const products = await ProductsRepository.findAll();
+
+    response.status(200).json(products);
+  }
 }
 
 export default new ProductController();

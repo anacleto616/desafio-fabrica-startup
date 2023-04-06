@@ -9,6 +9,12 @@ class ProductsRepository {
 
     return row;
   }
+
+  async findAll() {
+    const row = await Product.find();
+
+    return row;
+  }
 }
 
 export default new ProductsRepository();
