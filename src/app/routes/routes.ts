@@ -1,12 +1,15 @@
 import { Router } from 'express';
+import AuthController from '../controllers/AuthController';
+import AuthMiddleware from '../middlewares/AuthMiddleware';
 import CategoryController from '../controllers/CategoryController';
 import ProductController from '../controllers/ProductController';
-import AuthController from '../controllers/AuthController';
 
 export const router = Router();
 
 // Login
 router.post('/auth/login', AuthController.auth);
+
+router.use(AuthMiddleware.authenticationMiddleware);
 
 // Category
 router.get('/categories', CategoryController.index);
