@@ -1,11 +1,10 @@
 import {model, Schema} from 'mongoose';
-import { Category } from './Category';
 
 export const Product = model(
   'Product',
   new Schema({
     categories: {
-      type: [Category],
+      type: [{ parent: Schema.Types.ObjectId, name: String }],
       required: true,
       ref: 'Category',
     },
