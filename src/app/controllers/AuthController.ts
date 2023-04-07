@@ -1,9 +1,14 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import { userBody } from '../utils/userBody';
+import { User } from '../models/User';
+
+dotenv.config();
 
 class AuthController {
   async auth(request: Request, response: Response) {
-    const { username, password } = request.body;
+    const { username, password } = userBody.parse(request.body);
 
     if (!username) {
       return response.status(400).json({ error: 'Username is required.' });
@@ -13,10 +18,22 @@ class AuthController {
       return response.status(400).json({ error: 'Password is required.' });
     }
 
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return response.status(404).json({ error: 'User not found.' });
+    }
+
+    const verifyPassword = user.password === password;
+
+    if (!verifyPassword) {
+      return response.status(400).json({ error: 'Invalid password.' });
+    }
+
     try {
       const token = jwt.sign(
-        '642f1bb6b32d581bc833886c',
-        '09513b3b-d017-4b8d-be57-5df1f2bf0eaa',
+        { id: user._id },
+        process.env.SECRET as string,
         { expiresIn: '24h' }
       );
 

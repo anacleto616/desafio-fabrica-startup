@@ -1,9 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import { User } from '../models/User';
 
 type JwtPayload = {
   id: string;
 };
+
+dotenv.config();
 
 class AuthMiddleware {
   async authenticationMiddleware(
@@ -21,8 +25,14 @@ class AuthMiddleware {
 
     const { id } = jwt.verify(
       token,
-      '09513b3b-d017-4b8d-be57-5df1f2bf0eaa'
+      process.env.SECRET as string
     ) as JwtPayload;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return response.status(401).json({ error: 'Unauthorized user' });
+    }
 
     next();
   }
