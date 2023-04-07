@@ -1,4 +1,4 @@
 export type CategoryType = {
-  parent: string;
+  parent?: string | null;
   name: string;
 }
