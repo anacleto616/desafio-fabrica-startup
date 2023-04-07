@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import ProductsRepository from '../repositories/ProductsRepository';
+import { productBody } from '../utils/productBody';
 
 class ProductController {
   async store(request: Request, response: Response) {
-    const { categories, name, quantity, price } = request.body;
+    const { categories, name, quantity, price } = productBody.parse(request.body);
 
     await ProductsRepository.create({ categories, name, quantity, price });
 
@@ -25,7 +26,7 @@ class ProductController {
 
   async update(request: Request, response: Response) {
     const { id } = request.params;
-    const { categories, name, quantity, price } = request.body;
+    const { categories, name, quantity, price } = productBody.parse(request.body);
 
     await ProductsRepository.update(id,
       {
