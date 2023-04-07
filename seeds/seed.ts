@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { Category } from '../src/app/models/Category';
+import { User } from '../src/app/models/User';
 
 mongoose
   .connect('mongodb://localhost:27017')
@@ -45,6 +46,11 @@ mongoose
 
     await Category.create({
       name: 'pets',
+    });
+
+    await User.create({
+      username: 'adminuser',
+      password: 'adminpass'
     });
 
     process.exit();
