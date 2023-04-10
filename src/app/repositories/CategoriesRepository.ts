@@ -6,6 +6,12 @@ class CategoriesRepository {
 
     return row;
   }
+
+  async findByName(name: string) {
+    const row = await Category.findOne({ name });
+
+    return row;
+  }
 }
 
 export default new CategoriesRepository();

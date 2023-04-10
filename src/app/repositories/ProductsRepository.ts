@@ -22,6 +22,12 @@ class ProductsRepository {
     return row;
   }
 
+  async findByName(name: string){
+    const row = await Product.findOne({ name });
+
+    return row;
+  }
+
   async update(id: string, { categories, name, quantity, price }: ProductType) {
     const row = await Product.findByIdAndUpdate(id, { categories, name, quantity, price });
 

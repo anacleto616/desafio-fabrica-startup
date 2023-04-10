@@ -1,4 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type CategoryType = {
-  parent?: string | null;
+  parent?: any | null;
   name: string;
 }

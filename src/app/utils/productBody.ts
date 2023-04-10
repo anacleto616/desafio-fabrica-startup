@@ -1,7 +1,8 @@
 import { z } from 'zod';
+import { categoryBody } from './categoryBody';
 
 export const productBody = z.object({
-  categories: z.object({parent: z.string(), name: z.string()}).array().nonempty(),
+  categories: categoryBody,
   name: z.string(),
   quantity: z.number().nonnegative(),
   price: z.number().nonnegative()
